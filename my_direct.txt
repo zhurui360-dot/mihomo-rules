@@ -11,3 +11,12 @@
 +.openyun.de5.net
 +.hy2.ccwu.cc
 +.openwrt.ccwu.cc
++.94nb.qzz.io
++.dxm.qzz.io
++.acc.gv.uy
++.kasile.xyz
++.kunkun.indevs.in
++.shuai.indevs.in
++.wrt.indevs.in
++.xdm.indevs.in
++.zhifu023.xyz

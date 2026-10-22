@@ -1,0 +1,6 @@
+# 自定义直连清单（一行一条，# 开头为注释）
+# 写法：裸域名 = 只匹配它自己；+. 开头 = 它和它的所有子域
+# 例：+.abc.com 匹配 abc.com / fn.abc.com / a.b.abc.com
+#     www.abc.com 只匹配 www.abc.com
+
++.xdm.us.ci

@@ -1,0 +1,48 @@
+name: build-mrs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - my_direct.txt
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 下载 mihomo
+        run: |
+          url=$(curl -s https://api.github.com/repos/MetaCubeX/mihomo/releases/latest \
+                | jq -r '.assets[].browser_download_url' \
+                | grep -E 'mihomo-linux-amd64-v[0-9].*\.gz$' | head -1)
+          echo "asset: $url"
+          test -n "$url"
+          curl -L -o mihomo.gz "$url"
+          gzip -d mihomo.gz
+          mv mihomo mihomo-bin
+          chmod +x mihomo-bin
+          ./mihomo-bin -v
+
+      - name: 编译 my_direct.mrs
+        run: ./mihomo-bin convert-ruleset domain text my_direct.txt my_direct.mrs && ls -l my_direct.mrs
+
+      - name: 提交产物
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add my_direct.mrs
+          if git diff --staged --quiet; then
+            echo "mrs 无变化，跳过提交"
+          else
+            git commit -m "chore: 自动编译 my_direct.mrs"
+            git push
+          fi
+
+      - name: 刷新 jsDelivr 缓存
+        run: curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/my_direct.mrs" || true

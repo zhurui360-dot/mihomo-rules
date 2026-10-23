@@ -20,3 +20,10 @@
 +.wrt.indevs.in
 +.xdm.indevs.in
 +.zhifu023.xyz
+
+# Google Play 下载 CDN（走直连，避免被代理节点回连国内 IP 时挂住）
++.googleapis.cn
++.xn--ngstr-lra8j.com
++.gvt1.com
++.gvt2.com
++.gvt3.com

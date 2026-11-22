@@ -3,7 +3,6 @@
 
 +.xdm.us.ci
 +.zhifu.us.ci
-+.985.us.ci
 +.mp4.us.ci
 +.kky.l.cd
 +.2kb.l.cd
